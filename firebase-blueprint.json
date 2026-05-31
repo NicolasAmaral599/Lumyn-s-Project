@@ -1,0 +1,100 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Premium user settings and metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "theme": { "type": "string", "enum": ["light", "dark", "system"] },
+        "onboarding": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Task": {
+      "title": "Productivity Task",
+      "description": "A task with AI prioritization",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["todo", "in-progress", "completed", "archived"] },
+        "priority": { "type": "string", "enum": ["low", "medium", "high", "ai-suggested"] },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "status"]
+    },
+    "Habit": {
+      "title": "Habit Tracker",
+      "description": "Daily habits for wellness",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "frequency": { "type": "string" },
+        "streak": { "type": "number" },
+        "lastCompleted": { "type": "string", "format": "date-time" },
+        "history": { "type": "object" },
+        "category": { "type": "string" }
+      },
+      "required": ["userId", "name"]
+    },
+    "Mood": {
+      "title": "Mood Log",
+      "description": "User emotional state tracking",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "score": { "type": "number", "description": "1 to 5" },
+        "note": { "type": "string" },
+        "energy": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "score", "timestamp"]
+    },
+    "Decision": {
+      "title": "AI Decision Support",
+      "description": "Intelligent decision analysis",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "problem": { "type": "string" },
+        "options": { "type": "array" },
+        "analysis": { "type": "object", "description": "AI generated pros/cons" },
+        "recommendation": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "problem"]
+    },
+    "StudyPlan": {
+      "title": "Study Schedule",
+      "description": "Academic planning with AI",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "subject": { "type": "string" },
+        "goal": { "type": "string" },
+        "schedule": { "type": "array" },
+        "progress": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "subject"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": { "schema": "User", "description": "Main user records" },
+    "/users/{userId}/tasks/{taskId}": { "schema": "Task", "description": "User specific tasks" },
+    "/users/{userId}/habits/{habitId}": { "schema": "Habit", "description": "User specific habits" },
+    "/users/{userId}/moods/{moodId}": { "schema": "Mood", "description": "Emotional tracking" },
+    "/users/{userId}/decisions/{decisionId}": { "schema": "Decision", "description": "Decision logs" },
+    "/users/{userId}/studies/{studyId}": { "schema": "StudyPlan", "description": "Academic plans" }
+  }
+}

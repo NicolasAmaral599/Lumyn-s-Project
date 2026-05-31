@@ -1,0 +1,8 @@
+{
+  "name": "Lumyn expotech",
+  "description": "Lumyn is a premium AI-powered life assistant and productivity ecosystem designed to enhance organization, wellness, and decision-making.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
